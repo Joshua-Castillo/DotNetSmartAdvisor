@@ -60,7 +60,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   // const handleRecipients = () => {};
 
   const handleFacultyCatalog = async () => {
-    let response = await fetch(`https://${window.location.hostname}/api/api/Cosmos`, {
+    let response = await fetch(`https://${window.location.hostname}/api/Cosmos`, {
       method: "GET",
     });
     response = await response.json();
