@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "t2/Re6oLJaobJteLD+IbVRLLe3lOr5FQhOSIO/FBcGxr5t1iDr9mKf/BVcVBwb5wqf/NFFZe0pdGRbBZYtdYMA==",
+  "dgSpecHash": "f/2F5yS0x3MwlRFJrtO4GHgMqI6CchRbMvxRLniLjS0N1vZqJh2fR4ikUWsyDL+6KqUfT5n+LkkNLLVjo39WPA==",
   "success": true,
-  "projectFilePath": "/Users/joshuacastillo/Code/F2022/SmartAdvisor/SmartAdvisor_ASPNetCoreReact/SmartAdvisor_ASPNetCoreReact.csproj",
+  "projectFilePath": "/Users/joshuacastillo/Code/F2022/DotNetSmartAdvisor/SmartAdvisor_ASPNetCoreReact.csproj",
   "expectedPackageFiles": [
     "/Users/joshuacastillo/.nuget/packages/azure.ai.language.questionanswering/1.1.0/azure.ai.language.questionanswering.1.1.0.nupkg.sha512",
     "/Users/joshuacastillo/.nuget/packages/azure.core/1.25.0/azure.core.1.25.0.nupkg.sha512",

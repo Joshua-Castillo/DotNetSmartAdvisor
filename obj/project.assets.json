@@ -8796,11 +8796,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/joshuacastillo/Code/F2022/SmartAdvisor/SmartAdvisor_ASPNetCoreReact/SmartAdvisor_ASPNetCoreReact.csproj",
+      "projectUniqueName": "/Users/joshuacastillo/Code/F2022/DotNetSmartAdvisor/SmartAdvisor_ASPNetCoreReact.csproj",
       "projectName": "SmartAdvisor_ASPNetCoreReact",
-      "projectPath": "/Users/joshuacastillo/Code/F2022/SmartAdvisor/SmartAdvisor_ASPNetCoreReact/SmartAdvisor_ASPNetCoreReact.csproj",
+      "projectPath": "/Users/joshuacastillo/Code/F2022/DotNetSmartAdvisor/SmartAdvisor_ASPNetCoreReact.csproj",
       "packagesPath": "/Users/joshuacastillo/.nuget/packages/",
-      "outputPath": "/Users/joshuacastillo/Code/F2022/SmartAdvisor/SmartAdvisor_ASPNetCoreReact/obj/",
+      "outputPath": "/Users/joshuacastillo/Code/F2022/DotNetSmartAdvisor/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/joshuacastillo/.nuget/NuGet/NuGet.Config"
