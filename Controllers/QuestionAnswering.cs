@@ -47,8 +47,8 @@ public class QuestionAnswering : ControllerBase
     }
 
     [EnableCors("CORSPolicy2")]
-    [HttpGet("question/{id}")]
-    public String GetByQuestion(string id)
+    [HttpPost("question/{id}")]
+    public String PostByQuestion(string id)
     {
         var MyConfig = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
         String myEndpoint = MyConfig.GetValue<string>("AppSettings:myEndpoint");
@@ -69,7 +69,7 @@ public class QuestionAnswering : ControllerBase
     // [EnableCors("CORSPolicy1")]
     //email 1=advisor email, email 2=student email, string= questoin
     [EnableCors("CORSPolicy2")]
-    [HttpGet("email/{advisorEmail}/{studentEmail}/{subject}/{question}")]
+    [HttpPost("email/{advisorEmail}/{studentEmail}/{subject}/{question}")]
     public IEnumerable<WeatherForecast> GetEmail(string advisorEmail, string studentEmail, string subject, string question)
     {
         var rng = new Random();

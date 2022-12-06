@@ -5,7 +5,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   const handleHello = () => {
     async function fetchData() {
       const response = await fetch(
-        "https://localhost:7050/api/weatherforecast",
+        `https://${window.location.hostname}/api/api/weatherforecast`,
         { method: "GET" }
       ).then((response) => response.json());
       console.log(response);
@@ -21,7 +21,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
 
   const handleQuestion = async (question) => {
     let response = await fetch(
-      `https://localhost:7050/api/weatherforecast/question/${question}`,
+      `https://${window.location.hostname}/api/question/${question}`,
       { method: "GET" }
     );
     response = await response.json();
@@ -50,7 +50,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
 
   const handleEmail = (advisorEmail, studentEmail, subject, question) => {
     fetch(
-      `https://localhost:7050/api/weatherforecast/email/${advisorEmail}/${studentEmail}/${subject}/${question}`,
+      `https://${window.location.hostname}/api/email/${advisorEmail}/${studentEmail}/${subject}/${question}`,
       {
         method: "GET",
       }
@@ -60,7 +60,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   // const handleRecipients = () => {};
 
   const handleFacultyCatalog = async () => {
-    let response = await fetch("https://localhost:7050/api/Cosmos", {
+    let response = await fetch(`https://${window.location.hostname}/api/api/Cosmos`, {
       method: "GET",
     });
     response = await response.json();
@@ -89,7 +89,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   };
 
   const handleCourseCatalog = async (message) => {
-    let response = await fetch("https://localhost:7050/api/Cosmos", {
+    let response = await fetch(`https://${window.location.hostname}/api/Cosmos`, {
       method: "GET",
     });
     response = await response.json();
@@ -151,7 +151,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
 
   const handleContactAdvisor = async (question) =>{
     let response = await fetch(
-      `https://localhost:7050/api/weatherforecast/question/${question}`,
+      `https://${window.location.hostname}/api/weatherforecast/question/${question}`,
       { method: "GET" }
     );
     response = await response.json();
