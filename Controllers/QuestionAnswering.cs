@@ -47,8 +47,8 @@ public class QuestionAnswering : ControllerBase
     }
 
     [EnableCors("CORSPolicy2")]
-    [HttpPost("question/{id}")]
-    public String PostByQuestion(string id)
+    [HttpPost("question/{insertQuestion}")]
+    public String PostByQuestion(string insertQuestion)
     {
         var MyConfig = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
         String myEndpoint = MyConfig.GetValue<string>("AppSettings:myEndpoint");
@@ -62,7 +62,7 @@ public class QuestionAnswering : ControllerBase
         QuestionAnsweringClient client = new QuestionAnsweringClient(endpoint, credential);
         QuestionAnsweringProject project = new QuestionAnsweringProject(projectName, deploymentName);
 
-        Response<AnswersResult> response = client.GetAnswers(id, project);
+        Response<AnswersResult> response = client.GetAnswers(insertQuestion, project);
 
         return JsonConvert.SerializeObject(response);
     }
