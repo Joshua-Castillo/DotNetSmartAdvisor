@@ -21,10 +21,9 @@ const MessageParser = ({ children, actions }) => {
       actions.handleCourseCatalog(message);
     } else if (message.includes("session")) {
       actions.handleSessions(message);
-    } else if (message.includes("enroll me")){
-      actions.handleContactAdvisor(message)
-    }
-    else {
+    } else if (message.includes("enroll me")) {
+      actions.handleContactAdvisor();
+    } else {
       actions.handleQuestion(message);
     }
   };
