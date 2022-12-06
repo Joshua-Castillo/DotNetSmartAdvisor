@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "wkNJeiaO+6muawmvT4p0guvy3icDwdutVaDfemXPdiU=",
+  "Source": "DotNetSmartAdvisor",
+  "BasePath": "_content/DotNetSmartAdvisor",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
