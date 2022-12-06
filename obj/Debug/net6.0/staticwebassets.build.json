@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "wkNJeiaO+6muawmvT4p0guvy3icDwdutVaDfemXPdiU=",
-  "Source": "DotNetSmartAdvisor",
-  "BasePath": "_content/DotNetSmartAdvisor",
+  "Hash": "GRSW6vVOSex2FNi86bowbaNSwhPIMyMgKgUQb+tovCU=",
+  "Source": "SmartAdvisor_ASPNetCoreReact",
+  "BasePath": "_content/SmartAdvisor_ASPNetCoreReact",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],

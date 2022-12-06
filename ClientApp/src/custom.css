@@ -1,0 +1,40 @@
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+code {
+  color: #E01A76;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.react-chatbot-kit-chat-container {
+  position: relative;
+  width: 400px;
+  margin-right:20px;
+  margin-bottom:20px;
+}
+.react-chatbot-kit-chat-bot-message {
+  margin-left: 0px;
+}
+
+.img-fluid{
+  max-width:100vw;
+  max-height:100vh;
+} 
+
+body{
+  background-color:maroon;
+}
+
+/* .react-chatbot-kit-chat-message-container {
+  padding: 0 17.5px 10px 17.5px;
+  overflow: scroll;
+  height: 424px;
+} */
+
