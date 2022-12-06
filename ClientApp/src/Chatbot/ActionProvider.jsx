@@ -22,7 +22,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   const handleQuestion = async (question) => {
     let response = await fetch(
       `https://${window.location.hostname}/api/QuestionAnswering/question/${question}`,
-      { method: "GET" }
+      { method: "POST" }
     );
     response = await response.json();
 
@@ -52,7 +52,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     fetch(
       `https://${window.location.hostname}/api/QuestionAnswering/email/${advisorEmail}/${studentEmail}/${subject}/${question}`,
       {
-        method: "GET",
+        method:"POST",
       }
     );
   };
