@@ -5,7 +5,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   const handleHello = () => {
     async function fetchData() {
       const response = await fetch(
-        `https://${window.location.hostname}/api/api/weatherforecast`,
+        `https://${window.location.hostname}/api/QuestionAnswering`,
         { method: "GET" }
       ).then((response) => response.json());
       console.log(response);
@@ -21,7 +21,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
 
   const handleQuestion = async (question) => {
     let response = await fetch(
-      `https://${window.location.hostname}/api/question/${question}`,
+      `https://${window.location.hostname}/api/QuestionAnswering/question/${question}`,
       { method: "GET" }
     );
     response = await response.json();
@@ -50,7 +50,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
 
   const handleEmail = (advisorEmail, studentEmail, subject, question) => {
     fetch(
-      `https://${window.location.hostname}/api/email/${advisorEmail}/${studentEmail}/${subject}/${question}`,
+      `https://${window.location.hostname}/api/QuestionAnswering/email/${advisorEmail}/${studentEmail}/${subject}/${question}`,
       {
         method: "GET",
       }
@@ -151,7 +151,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
 
   const handleContactAdvisor = async (question) =>{
     let response = await fetch(
-      `https://${window.location.hostname}/api/weatherforecast/question/${question}`,
+      `https://${window.location.hostname}/api/QuestionAnswering/question/${question}`,
       { method: "GET" }
     );
     response = await response.json();
