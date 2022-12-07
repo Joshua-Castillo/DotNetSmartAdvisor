@@ -5,7 +5,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   const handleHello = () => {
     async function fetchData() {
       const response = await fetch(
-        `https://${window.location.hostname}/api/QuestionAnswering`,
+        `https://smartadvisorapi.azure-api.net/api/QuestionAnswering`,
         { method: "GET" }
       ).then((response) => response.json());
       console.log(response);
@@ -21,7 +21,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
 
   const handleQuestion = async (question) => {
     let response = await fetch(
-      `https://${window.location.hostname}/api/QuestionAnswering/question/${question}`,
+      `https://smartadvisorapi.azure-api.net/api/QuestionAnswering/question/${question}`,
       { method: "POST" }
     );
     response = await response.json();
@@ -49,7 +49,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
 
   const handleEmail = (advisorEmail, studentEmail, subject, question) => {
     fetch(
-      `https://${window.location.hostname}/api/QuestionAnswering/email/${advisorEmail}/${studentEmail}/${subject}/${question}`,
+      `https://smartadvisorapi.azure-api.net/api/QuestionAnswering/email/${advisorEmail}/${studentEmail}/${subject}/${question}`,
       {
         method: "POST",
       }
@@ -60,7 +60,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
 
   const handleFacultyCatalog = async () => {
     let response = await fetch(
-      `https://${window.location.hostname}/api/Cosmos`,
+      `https://smartadvisorapi.azure-api.net/api/Cosmos`,
       {
         method: "GET",
       }
@@ -76,9 +76,9 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     }));
   };
   const handleSessions = async (message) => {
-    console.log(`https://${window.location.hostname}/api/Cosmos`);
+    // console.log(`https://smartadvisorapi.azure-api.net/api/Cosmos`);
     let response = await fetch(
-      `https://${window.location.hostname}/api/Cosmos`,
+      `https://smartadvisorapi.azure-api.net/api/Cosmos`,
       { method: "GET" }
     );
     response = await response.json();
@@ -109,7 +109,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
 
   const handleCourseCatalog = async (message) => {
     let response = await fetch(
-      `https://${window.location.hostname}/api/Cosmos`,
+      `https://smartadvisorapi.azure-api.net/api/Cosmos`,
       {
         method: "GET",
       }
