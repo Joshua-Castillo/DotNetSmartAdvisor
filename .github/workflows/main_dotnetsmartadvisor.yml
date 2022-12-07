@@ -1,0 +1,77 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy ASP.Net Core app to Azure Web App - DotNetSmartAdvisor
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "6.0.x"
+          include-prerelease: true
+
+      - name: Build with dotnet
+        run: dotnet build --configuration Release
+
+      - name: dotnet publish
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+
+      #substitute production appsettings entries to appsettings json file
+      - name: App Settings Variable Substitution
+        uses: microsoft/variable-substitution@v1
+        with:
+          files: "${{env.DOTNET_ROOT}}/myapp/appsettings.json"
+        env:
+          ConnectionStrings.Default: ${{ secrets.APP_SETTINGS }}
+          AppSettings.myEndpoint: ${{ secrets.AI_AZURE_ENDPOINT }}
+          AppSettings.azureKeyCredential: ${{ secrets.AI_AZURE_KEY }}
+          AppSettings.projectName: ${{ secrets.AI_AZURE_PROJECT_NAME }}
+          AzureCosmosDbSettings.URL: ${{ secrets.COSMOS_DB_URL }}
+          AzureCosmosDbSettings.PrimaryKey: ${{ secrets.COSMOS_DB_KEY }}
+          AzureCosmosDbSettings.DatabaseName: ${{ secrets.COSMOS_DB_DB_NAME }}
+          AzureCosmosDbSettings.ContainerName: ${{ secrets.COSMOS_DB_CONTAINER_NAME }}
+          EmailConfiguration.From: ${{ secrets.EMAIL_FROM }}
+          EmailConfiguration.Username: ${{ secrets.EMAIL_USERNAME }}
+          EmailConfiguration.Password: ${{ secrets.EMAIL_PASSWORD }}
+          EmailConfiguration.SmtpServer: ${{ secrets.EMAIL_SMTP_SERVER }}
+          App.ServerRootAddress: ${{ env.SERVER_ROOT_ADDRESS }}
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v2
+        with:
+          name: .net-app
+          path: ${{env.DOTNET_ROOT}}/myapp
+
+  deploy:
+    runs-on: windows-latest
+    needs: build
+    environment:
+      name: "Production"
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: .net-app
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: "DotNetSmartAdvisor"
+          slot-name: "Production"
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8EAAF398683845E1B7B9584E9AB08EE6 }}
+          package: .
