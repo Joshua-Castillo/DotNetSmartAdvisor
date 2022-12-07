@@ -45,7 +45,7 @@ jobs:
           EmailConfiguration.From: ${{ secrets.EMAIL_FROM }}
           EmailConfiguration.Username: ${{ secrets.EMAIL_USERNAME }}
           EmailConfiguration.Password: ${{ secrets.EMAIL_PASSWORD }}
-          EmailConfiguration.SmtpServer: ${{ secrets.EMAIL_SMTP }}
+          EmailConfiguration.SmtpServer: ${{ secrets.EMAIL_SMTP_SERVER }}
           App.ServerRootAddress: ${{ env.SERVER_ROOT_ADDRESS }}
 
       - name: Upload artifact for deployment job
