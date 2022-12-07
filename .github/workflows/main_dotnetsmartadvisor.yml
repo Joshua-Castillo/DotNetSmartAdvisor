@@ -35,6 +35,17 @@ jobs:
           files: "${{env.DOTNET_ROOT}}/myapp/appsettings.json"
         env:
           ConnectionStrings.Default: ${{ secrets.APP_SETTINGS }}
+          AppSettings.myEndpoint: ${{ secrets.AI_AZURE_ENDPOINT }}
+          AppSettings.azureKeyCredential: ${{ secrets.AI_AZURE_KEY }}
+          AppSettings.projectName: ${{ secrets.AI_AZURE_PROJECT_NAME }}
+          AzureCosmosDbSettings.URL: ${{ secrets.COSMOS_DB_URL }}
+          AzureCosmosDbSettings.PrimaryKey: ${{ secrets.COSMOS_DB_KEY }}
+          AzureCosmosDbSettings.DatabaseName: ${{ secrets.COSMOS_DB_DB_NAME }}
+          AzureCosmosDbSettings.ContainerName: ${{ secrets.COSMOS_DB_CONTAINER_NAME }}
+          EmailConfiguration.From: ${{ secrets.EMAIL_FROM }}
+          EmailConfiguration.Username: ${{ secrets.EMAIL_USERNAME }}
+          EmailConfiguration.Password: ${{ secrets.EMAIL_PASSWORD }}
+          EmailConfiguration.SmtpServer: ${{ secrets.EMAIL_SMTP }}
           App.ServerRootAddress: ${{ env.SERVER_ROOT_ADDRESS }}
 
       - name: Upload artifact for deployment job
