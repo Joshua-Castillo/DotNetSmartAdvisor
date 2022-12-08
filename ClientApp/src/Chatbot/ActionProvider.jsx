@@ -5,7 +5,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   const handleHello = () => {
     async function fetchData() {
       const response = await fetch(
-        `https://smartadvisorapi.azure-api.net/api/QuestionAnswering`,
+        `${window.location}api/QuestionAnswering`,
         { method: "GET" }
       ).then((response) => response.json());
       console.log(response);
@@ -21,13 +21,12 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
 
   const handleQuestion = async (question) => {
     let response = await fetch(
-      `https://smartadvisorapi.azure-api.net/api/QuestionAnswering/question/${question}`,
-      { method: "POST" }
+      `${window.location}api/QuestionAnswering/question/${question}`,
+      { method: "POST" },
     );
     response = await response.json();
 
     let answer = response.Value.Answers[0].Answer;
-    // console.log(answer)
 
     console.log(answer);
     let botMessage;
@@ -49,10 +48,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
 
   const handleEmail = (advisorEmail, studentEmail, subject, question) => {
     fetch(
-      `https://smartadvisorapi.azure-api.net/api/QuestionAnswering/email/${advisorEmail}/${studentEmail}/${subject}/${question}`,
-      {
-        method: "POST",
-      }
+      `${window.location}api/QuestionAnswering/email/${advisorEmail}/${studentEmail}/${subject}/${question}`
     );
   };
 
@@ -60,7 +56,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
 
   const handleFacultyCatalog = async () => {
     let response = await fetch(
-      `https://smartadvisorapi.azure-api.net/api/Cosmos`,
+      `${window.location}api/Cosmos`,
       {
         method: "GET",
       }
@@ -75,10 +71,10 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
       messages: [...prev.messages, botMessage],
     }));
   };
+
   const handleSessions = async (message) => {
-    // console.log(`https://smartadvisorapi.azure-api.net/api/Cosmos`);
     let response = await fetch(
-      `https://smartadvisorapi.azure-api.net/api/Cosmos`,
+      `${window.location}api/Cosmos`,
       { method: "GET" }
     );
     response = await response.json();
@@ -109,7 +105,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
 
   const handleCourseCatalog = async (message) => {
     let response = await fetch(
-      `https://smartadvisorapi.azure-api.net/api/Cosmos`,
+      `${window.location}api/Cosmos`,
       {
         method: "GET",
       }
@@ -157,14 +153,18 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     }
     console.log(catalogToSearch);
     console.log(subjectToSearch);
+   
+  let botMessage = "Sorry, can't find the answer"
 
-    let botMessage = createChatBotMessage(
-      response[2].data.courseCatalogData.filter(
-        (record) =>
-          record.subject === subjectToSearch &&
-          record.catalog === catalogToSearch
-      )[0].preRequisiteDescription
-    );
+  let apiResponse =
+    response[2].data.courseCatalogData.filter(
+      (record) =>
+        record.subject === subjectToSearch &&
+        record.catalog === catalogToSearch
+    )[0].preRequisiteDescription;
+    
+    if (apiResponse.length){botMessage=apiResponse[0].preRequisiteDescription}
+
     setState((prev) => ({
       ...prev,
       messages: [...prev.messages, botMessage],
@@ -187,8 +187,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
       studentEmail;
 
     let response = await fetch(
-      `https://smartadvisorapi.azure-api.net/api/QuestionAnswering/email/${advisorEmail}/${studentEmail}/${subject}/${question}`,
-      { method: "POST" }
+      `${window.location}api/QuestionAnswering/email/${advisorEmail}/${studentEmail}/${subject}/${question}`,
     );
     response = await response.json();
 
