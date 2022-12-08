@@ -1,12 +1,13 @@
-# DotNetSmartAdvisor
+#DotNetSmartAdvisor#
 
---To Visit Web Service--
+###Visit Web Service###
 https://smartadvisorapi.developer.azure-api.net/
 
---To Visit Hosted Web App--
+###Visit Hosted Web App###
 https://dotnetsmartadvisor.azurewebsites.net/
 
---To Run Locally--
+##Run##
+###To Run Locally###
 1. Ensure appsettings.json with proper credentials is in root folder
 2. Open terminal to root
 3. Run: dotnet restore 
@@ -15,7 +16,7 @@ https://dotnetsmartadvisor.azurewebsites.net/
 6. Open https://localhost:7050 on browser
 7. Ask questions
 
---To Run API Dev Tests--
+###To Run API Dev Tests###
 1. Ensure appsettings.json with proper credentials is in root folder
 2. Open terminal to root
 3. Run: dotnet restore 
@@ -23,22 +24,22 @@ https://dotnetsmartadvisor.azurewebsites.net/
 5. Run: dotnet run
 6. Open https://localhost:7050/swagger/index.html on browser
 
-# About
---Languages--
-- C#
-- Typescript
-- Javascript
+##About##
+*Languages
+  *C#
+  *Typescript
+  *Javascript
 
---Tech Stack--
-- React
-- Bootstap
-- ASP Net Core
+*Tech Stack
+  *React
+  *Bootstap
+  *ASP Net Core
 
-- Azure Services:
-  - Azure Cognitive Services: Question Answering
-  - Azure API Management Services
-  - Azure CosmosDB
-  - Azure App Services
+*Microsoft Azure Services:
+  *Cognitive Services: Question Answering
+  *API Management Services
+  *CosmosDB NoSQL Database
+  *App Services
 
 
 
