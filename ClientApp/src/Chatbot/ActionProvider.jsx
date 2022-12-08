@@ -5,7 +5,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   const handleHello = () => {
     async function fetchData() {
       const response = await fetch(
-        `${window.location}api/QuestionAnswering`,
+        `https://localhost:7050/api/QuestionAnswering`,
         { method: "GET" }
       ).then((response) => response.json());
       console.log(response);
@@ -22,7 +22,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
 
   const handleQuestion = async (question) => {
     let response = await fetch(
-      `${window.location}api/QuestionAnswering/question/${question}`,
+      `https://localhost:7050/api/QuestionAnswering/question/${question}`,
       { method: "POST" },
     );
     response = await response.json();
@@ -49,7 +49,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
 
   const handleEmail = (advisorEmail, studentEmail, subject, question) => {
     fetch(
-      `${window.location}api/QuestionAnswering/email/${advisorEmail}/${studentEmail}/${subject}/${question}`
+      `https://localhost:7050/api/QuestionAnswering/email/${advisorEmail}/${studentEmail}/${subject}/${question}`
     );
   };
 
@@ -57,7 +57,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
 
   const handleFacultyCatalog = async () => {
     let response = await fetch(
-      `${window.location}api/Cosmos`,
+      `https://localhost:7050/api/Cosmos`,
       {
         method: "GET",
       }
@@ -75,7 +75,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
 
   const handleSessions = async (message) => {
     let response = await fetch(
-      `${window.location}api/Cosmos`,
+      `https://localhost:7050/api/Cosmos`,
       { method: "GET" }
     );
     response = await response.json();
@@ -184,7 +184,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
       studentEmail;
 
     let response = await fetch(
-      `${window.location}api/QuestionAnswering/email/${advisorEmail}/${studentEmail}/${subject}/${question}`,
+      `https://localhost:7050/api/QuestionAnswering/email/${advisorEmail}/${studentEmail}/${subject}/${question}`,
     );
     response = await response.json();
 
