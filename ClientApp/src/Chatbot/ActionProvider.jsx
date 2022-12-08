@@ -11,8 +11,9 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
       console.log(response);
       return response;
     }
+
     fetchData();
-    const botMessage = createChatBotMessage("NOICE");
+    const botMessage = createChatBotMessage("hello back to you");
     setState((prev) => ({
       ...prev,
       messages: [...prev.messages, botMessage],
@@ -104,18 +105,16 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   };
 
   const handleCourseCatalog = async (message) => {
-    let response = await fetch(
-      `${window.location}api/Cosmos`,
-      {
-        method: "GET",
-      }
-    );
+    let response = await fetch(`${window.location}/api/Cosmos`, {
+      method: "GET",
+    });
     response = await response.json();
     console.log("1", message);
     message = message.replace(/\s/g, "").toUpperCase();
     console.log("2", message);
     let subjectToSearch;
     let catalogToSearch;
+
 
     switch (true) {
       case message.includes("BEFORE") && message.includes("TAKING"):
@@ -153,24 +152,22 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     }
     console.log(catalogToSearch);
     console.log(subjectToSearch);
-   
-  let botMessage = "Sorry, can't find the answer"
 
-  let apiResponse =
-    response[2].data.courseCatalogData.filter(
-      (record) =>
-        record.subject === subjectToSearch &&
-        record.catalog === catalogToSearch
-    )[0].preRequisiteDescription;
     
-    if (apiResponse.length){botMessage=apiResponse[0].preRequisiteDescription}
-
+    let botMessage = createChatBotMessage(
+      response[2].data.courseCatalogData.filter(
+        (record) =>
+          record.subject === subjectToSearch &&
+          record.catalog === catalogToSearch
+      )[0].preRequisiteDescription
+    );
     setState((prev) => ({
       ...prev,
       messages: [...prev.messages, botMessage],
     }));
   };
 
+  
   const handleContactAdvisor = async () => {
     answer2();
     let advisorEmail = "coen424gr11@outlook.com";
