@@ -19,9 +19,10 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     }));
   };
 
-  const handleQuestion = async (question) => {
+  const handleQuestion = async (insertQuestion) => {
     let response = await fetch(
-      `https://${window.location.hostname}/api/QuestionAnswering/question/${question}`,
+      //`https://smartadvisorapi.azure-api.net/api/QuestionAnswering/question/${insertQuestion}`,
+      `https://${window.location.hostname}/api/QuestionAnswering/${insertQuestion}`,
       { method: "POST" }
     );
     response = await response.json();
@@ -47,16 +48,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     }));
   };
 
-  const handleEmail = (advisorEmail, studentEmail, subject, question) => {
-    fetch(
-      `https://${window.location.hostname}/api/QuestionAnswering/email/${advisorEmail}/${studentEmail}/${subject}/${question}`,
-      {
-        method: "POST",
-      }
-    );
-  };
-
-  // const handleRecipients = () => {};
+  //
 
   const handleFacultyCatalog = async () => {
     let response = await fetch(
@@ -84,23 +76,6 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     response = await response.json();
     console.log(response[1]);
     let botMessage = createChatBotMessage("get em");
-    setState((prev) => ({
-      ...prev,
-      messages: [...prev.messages, botMessage],
-    }));
-  };
-
-  const answer1 = () => {
-    let botquestion = createChatBotMessage("Please enter your email");
-    console.log(botquestion);
-    setState((prev) => ({
-      ...prev,
-      messages: [...prev.messages, botquestion],
-    }));
-  };
-  const answer2 = () => {
-    let botMessage = createChatBotMessage("Please enter your Major");
-    console.log(botMessage);
     setState((prev) => ({
       ...prev,
       messages: [...prev.messages, botMessage],
@@ -171,28 +146,75 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     }));
   };
 
-  const handleContactAdvisor = async () => {
-    answer2();
-    let advisorEmail = "coen424gr11@outlook.com";
-
-    answer1();
-    let studentEmail = "studentemail.fake@gmail.com";
-
-    let subject = "A student has a question for you!";
-
-    let question =
-      "I am waitlisted for a course. Can you please enroll me in this class. \n" +
-      "Please responde to email : " +
-      "\n" +
-      studentEmail;
-
-    let response = await fetch(
-      `https://smartadvisorapi.azure-api.net/api/QuestionAnswering/email/${advisorEmail}/${studentEmail}/${subject}/${question}`,
-      { method: "POST" }
+  const handleEmail = (advisorEmail, studentEmail, subject, question) => {
+    fetch(
+      `https://${window.location.hostname}/api/QuestionAnswering/email/${advisorEmail}/${studentEmail}/${subject}/${question}`,
+      {
+        method: "POST",
+      }
     );
-    response = await response.json();
+  };
 
-    console.log("answer:  ", response.Value.Answers[0].Answer);
+  const answer1 = (response) => {
+    let botquestion = createChatBotMessage(
+      "I can't do that, we'll have to send an email to your advisor! Please enter your email: "
+    );
+    console.log(botquestion);
+    setState((prev) => ({
+      ...prev,
+      messages: [...prev.messages, botquestion],
+    }));
+  };
+  const answer2 = () => {
+    let botMessage = createChatBotMessage("Please enter your Major");
+    console.log(botMessage);
+    setState((prev) => ({
+      ...prev,
+      messages: [...prev.messages, botMessage],
+    }));
+  };
+  const answer3 = () => {
+    let botMessage = createChatBotMessage(
+      "Please detail your question below : "
+    );
+    console.log(botMessage);
+    setState((prev) => ({
+      ...prev,
+      messages: [...prev.messages, botMessage],
+    }));
+  };
+
+  // const saveMessages = (messages) => {
+  //   localStorage.setItem("chat_messages", JSON.stringify(messages));
+  // };
+
+  const handleRecipients = (major) => {
+    answer2();
+    let input = JSON.stringify(major);
+    console.log("input ", input);
+  };
+
+  const handleInputPhrase = (question) => {
+    answer3();
+    let input = JSON.stringify(question);
+    console.log("question ", input);
+  };
+  const handleContactAdvisor = async () => {
+    answer1();
+
+    // let subject = "A student has a question for you!";
+    // let question =
+    //   "I am waitlisted for a course. Can you please enroll me in this class. \n" +
+    //   "Please responde to email : " +
+    //   "\n" +
+    //   studentEmail;
+    // let response = await fetch(
+    //   //`https://smartadvisorapi.azure-api.net/api/QuestionAnswering/email/${advisorEmail}/${studentEmail}/${subject}/${question}`,
+    //   `https://localhost:7050/api/QuestionAnswering/email/${advisorEmail}/${studentEmail}/${subject}/${question}`,
+    //   { method: "POST" }
+    // );
+    // response = await response.json();
+    // console.log("answer:  ", response.Value.Answers[0].Answer);
   };
 
   return (
@@ -207,6 +229,8 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
             handleSessions,
             handleEmail,
             handleContactAdvisor,
+            handleRecipients,
+            handleInputPhrase,
           },
         });
       })}
