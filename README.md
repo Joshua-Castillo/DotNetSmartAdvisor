@@ -1,42 +1,44 @@
 # DotNetSmartAdvisor
 
-IDE:
+--To Visit Web Service--
+https://smartadvisorapi.developer.azure-api.net/
 
-VS Code
-Installation Guide:
+--To Visit Hosted Web App--
+https://dotnetsmartadvisor.azurewebsites.net/
 
-run on terminal inside SmartAdvisor folder:
-dotnet new -i Microsoft.Bot.Framework.CSharp.EchoBot
-dotnet new -i Microsoft.Bot.Framework.CSharp.CoreBot
-dotnet new -i Microsoft.Bot.Framework.CSharp.EmptyBot
-dotnet add package Microsoft.Bot.Builder.Dialogs
-Extensions to install:
+--To Run Locally--
+1. Ensure appsettings.json with proper credentials is in root folder
+2. Open terminal to root
+3. Run: dotnet restore 
+4. Run: dotnet build
+5. Run: dotnet run
+6. Open https://localhost:7050 on browser
+7. Ask questions
 
-C#
-.NET Extension Package
-.NET Core Tools
-How to connect Chatbot
+--To Run API Dev Tests--
+1. Ensure appsettings.json with proper credentials is in root folder
+2. Open terminal to root
+3. Run: dotnet restore 
+4. Run: dotnet build
+5. Run: dotnet run
+6. Open https://localhost:7050/swagger/index.html on browser
 
-cd into SmartAdvisor-ASPNetCoreReact
-cd into ClientAppietn
-run command 'npm install react-chatbot-kit --save-dev'
-How to run React App
+# About
+--Languages--
+- C#
+- Typescript
+- Javascript
 
-cd .. (to go back to SmartAdvisor_ASPNetCoreReact)
+--Tech Stack--
+- React
+- Bootstap
+- ASP Net Core
 
-run command 'dotnet restore'
+- Azure Services:
+  - Azure Cognitive Services: Question Answering
+  - Azure API Management Services
+  - Azure CosmosDB
+  - Azure App Services
 
-run command 'dotnet build'
 
-run command 'dotnet run'
 
-if needed, run dotnet dev-certs https --trust
-
-How to run dev test with Swagger
-
-cd into SmartAdvisor_ASPNetCoreReact
-run command 'dotnet restore'
-run command 'dotnet build'
-run command 'dotnet run'
-open browser to https://localhost:/swagger/v1/swagger.json
-open browser to https://localhost:/swagger/
