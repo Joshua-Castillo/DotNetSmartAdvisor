@@ -195,7 +195,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   };
   const answer6 = () => {
     let botMessage = createChatBotMessage(
-      "If you would like to proceed, please enter the email provided! If not, ask anyother question. "
+      "If you would like to proceed, please enter the email provided! If not, press enter to continue. "
     );
     console.log(botMessage);
     setState((prev) => ({
@@ -249,7 +249,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
       ...prev,
       messages: [...prev.messages, botMessage],
     }));
-    handleQuestion();
+    //handleQuestion();
   };
   const handleContactAdvisor = async () => {
     answer1();
