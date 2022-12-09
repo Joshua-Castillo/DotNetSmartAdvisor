@@ -20,15 +20,15 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     }));
   };
 
-  const handleQuestion = async (question) => {
+  const handleQuestion = async (insertQuestion) => {
     let response = await fetch(
-      `https://localhost:7050/api/QuestionAnswering/question/${question}`,
-      { method: "POST" },
+      `https://localhost:7050/api/QuestionAnswering/question/${insertQuestion}`,
+      //`https://${window.location.hostname}/api/QuestionAnswering/${insertQuestion}`,
+      { method: "POST" }
     );
     response = await response.json();
 
     let answer = response.Value.Answers[0].Answer;
-
     console.log(answer);
     let botMessage;
     console.log(answer.substring(0, 4));
@@ -47,21 +47,10 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     }));
   };
 
-  const handleEmail = (advisorEmail, studentEmail, subject, question) => {
-    fetch(
-      `https://localhost:7050/api/QuestionAnswering/email/${advisorEmail}/${studentEmail}/${subject}/${question}`
-    );
-  };
-
-  // const handleRecipients = () => {};
-
   const handleFacultyCatalog = async () => {
-    let response = await fetch(
-      `https://localhost:7050/api/Cosmos`,
-      {
-        method: "GET",
-      }
-    );
+    let response = await fetch(`https://localhost:7050/api/Cosmos`, {
+      method: "GET",
+    });
     response = await response.json();
 
     console.log(response[0]);
@@ -74,30 +63,12 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   };
 
   const handleSessions = async (message) => {
-    let response = await fetch(
-      `https://localhost:7050/api/Cosmos`,
-      { method: "GET" }
-    );
+    let response = await fetch(`https://localhost:7050/api/Cosmos`, {
+      method: "GET",
+    });
     response = await response.json();
     console.log(response[1]);
     let botMessage = createChatBotMessage("get em");
-    setState((prev) => ({
-      ...prev,
-      messages: [...prev.messages, botMessage],
-    }));
-  };
-
-  const answer1 = () => {
-    let botquestion = createChatBotMessage("Please enter your email");
-    console.log(botquestion);
-    setState((prev) => ({
-      ...prev,
-      messages: [...prev.messages, botquestion],
-    }));
-  };
-  const answer2 = () => {
-    let botMessage = createChatBotMessage("Please enter your Major");
-    console.log(botMessage);
     setState((prev) => ({
       ...prev,
       messages: [...prev.messages, botMessage],
@@ -114,7 +85,6 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     console.log("2", message);
     let subjectToSearch;
     let catalogToSearch;
-
 
     switch (true) {
       case message.includes("BEFORE") && message.includes("TAKING"):
@@ -153,7 +123,6 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     console.log(catalogToSearch);
     console.log(subjectToSearch);
 
-    
     let botMessage = createChatBotMessage(
       response[2].data.courseCatalogData.filter(
         (record) =>
@@ -167,28 +136,122 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     }));
   };
 
-  
-  const handleContactAdvisor = async () => {
-    answer2();
-    let advisorEmail = "coen424gr11@outlook.com";
-
-    answer1();
-    let studentEmail = "studentemail.fake@gmail.com";
-
-    let subject = "A student has a question for you!";
-
-    let question =
-      "I am waitlisted for a course. Can you please enroll me in this class. \n" +
-      "Please responde to email : " +
-      "\n" +
-      studentEmail;
-
+  const handleEmail = async (advisorEmail, studentEmail, subject, question) => {
     let response = await fetch(
       `https://localhost:7050/api/QuestionAnswering/email/${advisorEmail}/${studentEmail}/${subject}/${question}`,
+      { method: "POST" }
+    );
+    response = await response.json();
+    console.log("response ", response);
+  };
+
+  const answer1 = () => {
+    let botquestion = createChatBotMessage(
+      "I can't do that, we'll have to send an email to your advisor! Please enter your email :"
+    );
+    console.log(botquestion);
+    setState((prev) => ({
+      ...prev,
+      messages: [...prev.messages, botquestion],
+    }));
+  };
+
+  const answer2 = () => {
+    let botMessage = createChatBotMessage("Please enter your Major :");
+    console.log(botMessage);
+    setState((prev) => ({
+      ...prev,
+      messages: [...prev.messages, botMessage],
+    }));
+  };
+
+  const answer3 = () => {
+    let botMessage = createChatBotMessage(
+      "Please provide a subject line.       Possible Format <Main topic for student name, studeny Id>: "
+    );
+    console.log(botMessage);
+    setState((prev) => ({
+      ...prev,
+      messages: [...prev.messages, botMessage],
+    }));
+  };
+  const answer4 = () => {
+    let botMessage = createChatBotMessage(
+      "Please detail your question below.     Suggested Format <I am [insert name and sutdent ID]. Your question> : "
+    );
+    console.log(botMessage);
+    setState((prev) => ({
+      ...prev,
+      messages: [...prev.messages, botMessage],
+    }));
+  };
+  const answer5 = () => {
+    let botMessage = createChatBotMessage("The email has been sent! ");
+    console.log(botMessage);
+    setState((prev) => ({
+      ...prev,
+      messages: [...prev.messages, botMessage],
+    }));
+  };
+  const answer6 = () => {
+    let botMessage = createChatBotMessage(
+      "If you would like to proceed, please enter the email provided! If not, ask anyother question. "
+    );
+    console.log(botMessage);
+    setState((prev) => ({
+      ...prev,
+      messages: [...prev.messages, botMessage],
+    }));
+  };
+
+  const handleRecipients = (major) => {
+    answer2();
+  };
+  const parseRecipients = async (details) => {
+    let response = await fetch(
+      `https://localhost:7050/api/QuestionAnswering/question/${details}`,
+      { method: "POST" }
     );
     response = await response.json();
 
-    console.log("answer:  ", response.Value.Answers[0].Answer);
+    let answer = response.Value.Answers[0].Answer;
+    console.log(answer.substring(0));
+    console.log(answer.search("Email: "));
+    var e = answer.split("Email: ");
+    console.log("e", e);
+    let advisorEmail = e.find((element) => element.includes("@"));
+    let botMessage = createChatBotMessage(
+      "This is the email of your advisor for your department: " +
+        advisorEmail +
+        "\n Shall we proceed? "
+    );
+    console.log(botMessage);
+    setState((prev) => ({
+      ...prev,
+      messages: [...prev.messages, botMessage],
+    }));
+    answer6();
+  };
+
+  const handleInputSubject = (subject) => {
+    answer3();
+  };
+  const handleInputPhrase = (question) => {
+    answer4();
+  };
+  const handleSentMessage = () => {
+    answer5();
+  };
+  const handleNotSent = () => {
+    let botMessage = createChatBotMessage("The email has not been sent.");
+    console.log(botMessage);
+    setState((prev) => ({
+      ...prev,
+      messages: [...prev.messages, botMessage],
+    }));
+  };
+  const handleContactAdvisor = async () => {
+    answer1();
   };
 
   return (
@@ -203,6 +266,12 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
             handleSessions,
             handleEmail,
             handleContactAdvisor,
+            handleRecipients,
+            handleInputPhrase,
+            handleInputSubject,
+            handleSentMessage,
+            parseRecipients,
+            handleNotSent,
           },
         });
       })}

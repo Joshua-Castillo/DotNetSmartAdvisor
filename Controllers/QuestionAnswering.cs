@@ -23,7 +23,7 @@ public class QuestionAnswering : ControllerBase
         _emailSender = emailSender;
     }
 
-    [EnableCors("CORSPolicy1")]
+    [EnableCors("CORSPolicy2")]
     [HttpGet]
     public String Get()
     {
