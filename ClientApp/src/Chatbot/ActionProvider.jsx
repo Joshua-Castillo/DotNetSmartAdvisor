@@ -249,6 +249,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
       ...prev,
       messages: [...prev.messages, botMessage],
     }));
+    handleQuestion();
   };
   const handleContactAdvisor = async () => {
     answer1();
